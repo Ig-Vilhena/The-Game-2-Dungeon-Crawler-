@@ -8,8 +8,9 @@ Em um mundo antigo e silencioso, um(a) viajante desperta na vila abandonada de K
 Será você capaz de atravessar as três fases e encontrar a verdade por trás do portão final?
 
 
-============================================================================================
+--------------------------------------------------------------------------------------------
 Controles:
+--------------------------------------------------------------------------------------------
 
 W → mover para cima
 
@@ -21,7 +22,9 @@ D → mover para a direita
 
 I → interagir (com NPCs, chaves, portas etc.)
 
+--------------------------------------------------------------------------------------------
 Objetivo:
+--------------------------------------------------------------------------------------------
 
 Coletar a chave (@)
 
@@ -31,8 +34,10 @@ Evitar monstros e armadilhas
 
 Avançar para a próxima fase através da porta aberta (=)
 
-Fases
+--------------------------------------------------------------------------------------------
 
+Fases
+--------------------------------------------------------------------------------------------
 1. Vila (Tutorial)
 
 Apresenta o personagem e os comandos
@@ -53,15 +58,20 @@ Se você for tocado por ele, perde uma tentativa
 
 O jogo pode ser expandido com novos elementos como espinhos, botões, teletransporte e monstros inteligentes (V)
 
-💡 Dicas
+--------------------------------------------------------------------------------------------
 
+Dicas
+--------------------------------------------------------------------------------------------
 Fique atento ao número de tentativas. Se perder 3 vezes, você volta ao menu.
 
 Nem tudo é o que parece. Interaja com todos os elementos.
 
 Pressione I para interagir mesmo que não veja nada visível — algo pode estar oculto.
 
-🎓 Desenvolvedores
+--------------------------------------------------------------------------------------------
+
+Desenvolvedores
+--------------------------------------------------------------------------------------------
 
 Nome: [Seu Nome Aqui]
 
