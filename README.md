@@ -6,6 +6,8 @@ Bem-vindo(a) ao mundo de The Game 2 — uma jornada misteriosa entre monstros e 
 Em um mundo antigo e silencioso, um(a) viajante desperta na vila abandonada de Kalla. Tudo parece quieto demais, exceto pelas vozes que sussurram entre as ruínas. Só há uma forma de entender o que aconteceu: descer até as profundezas das masmorras esquecidas e encarar os monstros que guardam segredos de um passado destruído.
 
 Será você capaz de atravessar as três fases e encontrar a verdade por trás do portão final?
+
+
 ======================================================================================================================================================================================================
 Controles:
 
