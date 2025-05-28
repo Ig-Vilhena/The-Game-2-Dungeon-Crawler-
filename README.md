@@ -8,7 +8,7 @@ Em um mundo antigo e silencioso, um(a) viajante desperta na vila abandonada de K
 Será você capaz de atravessar as três fases e encontrar a verdade por trás do portão final?
 
 
-======================================================================================================================================================================================================
+=================================================================================================
 Controles:
 
 W → mover para cima
