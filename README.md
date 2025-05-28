@@ -1,6 +1,7 @@
 *The Game 2*
 
 ***História***
+
 Em um mundo distante, o equilíbrio emocional da humanidade estava guardado por uma entidade adormecida chamada “Cobra na Caixa”, aprisionada sob as Montanhas do Silêncio. Após gerações em paz, sentimentos esquecidos como inveja, tristeza e raiva começaram a transbordar. Foi assim que surgiram as Gousmas — criaturas viscosas formadas pelas emoções corrompidas dos humanos.
 
 Você é Arnar, um jovem do vilarejo de Hvitárvatn. Ao ouvir os sussurros vindos das florestas sombrias e dos antigos cantos da vila, você descobre que pertence à linhagem dos Guardiões da Canção, seres capazes de transformar emoções em energia viva. Agora, com o selo da “Cobra na Caixa” enfraquecendo, você deve impedir que as Gousmas libertem a entidade e tragam o caos ao mundo.
