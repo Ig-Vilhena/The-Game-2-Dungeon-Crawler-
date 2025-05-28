@@ -1,4 +1,4 @@
-*The Game 2*
+# *The Game 2*
 
 ***História***
 
@@ -8,7 +8,7 @@ Você é Arnar, um jovem do vilarejo de Hvitárvatn. Ao ouvir os sussurros vindo
 
 “And we’ll build our empire from the ashes of hope…” – Of Monsters and Men
 
-Como Jogar
+***Como Jogar***
 
 Compile o jogo com um compilador C compatível com sua plataforma.
 Execute o jogo no terminal.
@@ -17,24 +17,19 @@ Enfrente Gousmas, evite armadilhas, ative mecanismos e colete cristais.
 Interaja com NPCs na vila (tela de tutorial) para aprender os controles.
 A jornada se passa por 3 fases, até o confronto final.
 
-Inimigos
+***Inimigos***
+
 Gousma Nível 1: Se move aleatoriamente. Um erro pode ser fatal.
 Gousma Nível 2: Segue o jogador com rastreio de movimento e visão.
 Armadilhas de espinhos: causam morte instantânea.
 Portais mágicos: permitem acesso entre zonas protegidas.
 
-NPCs
-Você começa na vila, onde habitantes antigos contam segredos do mundo, explicam os controles e alertam sobre as Gousmas.
+***Estrutura do Projeto***
 
-Estrutura do Projeto
 main.c: Arquivo principal com o menu e loop do jogo.
-
 mapa.c: Renderização dos mapas, movimentação e colisão.
-
 fase1.c, fase2.c, fase3.c: Cada fase com inimigos, desafios e objetivos.
-
 monstros.c: Lógica de IA das Gousmas.
-
 telas.c: Telas de menu, vitória e derrota.
 
 
