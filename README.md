@@ -73,8 +73,8 @@ Pressione I para interagir mesmo que não veja nada visível — algo pode estar
 Desenvolvedores
 --------------------------------------------------------------------------------------------
 
-Nome: [Seu Nome Aqui]
+Nome: [Igor Cecim Vilhena, Herbert Aciolly Leão de Jesus, ]
 
-Curso: Ciência da Computação - 1º semestre
+Curso: [Ciência da Computação]
 
-Universidade: [Nome da Faculdade ou Universidade]
+Universidade: [Cesupa]
