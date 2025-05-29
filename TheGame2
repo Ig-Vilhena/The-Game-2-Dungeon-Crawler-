@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h> // Para Windows (_getch)
-#include <windows.h> // Para Sleep
+#include <conio.h> 
+#include <windows.h>
 #include <string.h>
 #include <time.h>
 
-#define LARGURA 20
-#define ALTURA 20
+#define ALTURA 40
+#define LARGURA 40
 
 // Definicoes de simbolos
 #define JOGADOR '&'
@@ -22,12 +22,13 @@
 
 // Variaveis globais
 char mapa[ALTURA][LARGURA + 1];
-int jogadorX = 1;
-int jogadorY = 1;
-int chaveColetada = 0;
-int portaAberta = 0;
-int reinicios = 0;
+int jogadorX = 1, jogadorY = 1;
+int chaveColetada = 0, portaAberta = 0, reinicios = 0;
 int monstroX = 6, monstroY = 10;
+int monstro2X = 1, monstro2Y = 1;
+int tele1X = 22, tele1Y = 36;
+int tele2X = 5, tele2Y = 1;
+int i, j;
 
 void limparTela() {
     system("cls");
@@ -50,8 +51,18 @@ void exibirTitulo() {
     _getch();
 }
 
+void limparMapa() {
+    for (i = 0; i < ALTURA; i++) {
+        for (j = 0; j < LARGURA; j++) {
+            mapa[i][j] = VAZIO;
+        }
+        mapa[i][LARGURA] = '\0';
+    }
+}
+
 void carregarMapaVila() {
-    char temp[10][11] = {
+    limparMapa();
+	char temp[10][11] = {
         "**********",
         "*        *",
         "* P      *",
@@ -63,80 +74,124 @@ void carregarMapaVila() {
         "*        *",
         "**********"
     };
-    int i;
-    for (i = 0; i < 10; i++) {
-        strcpy(mapa[i], temp[i]);
-    }
-    jogadorX = 4;
-    jogadorY = 4;
-    chaveColetada = 0;
-    portaAberta = 0;
+    for (i = 0; i < 10; i++) strcpy(mapa[i], temp[i]);
+    jogadorX = 4; jogadorY = 4;
+    chaveColetada = portaAberta = 0;
 }
 
 void carregarMapaFase1() {
-    char temp[10][11] = {
-        "**********",
-        "*   @    *",
-        "* ****** *",
-        "*        *",
-        "*        *",
-        "*        *",
-        "*     D  *",
-        "*        *",
-        "*        *",
-        "**********"
-    };
-    int i;
-    for (i = 0; i < 10; i++) {
-        strcpy(mapa[i], temp[i]);
-    }
-    jogadorX = 4;
-    jogadorY = 4;
-    chaveColetada = 0;
-    portaAberta = 0;
+    limparMapa();
+    strcpy(mapa[0],  "**********");
+    strcpy(mapa[1],  "*@     * D");
+    strcpy(mapa[2],  "* **** * *");
+    strcpy(mapa[3],  "* *      *");
+    strcpy(mapa[4],  "* * **** *");
+    strcpy(mapa[5],  "*   *    *");
+    strcpy(mapa[6],  "***** ****");
+    strcpy(mapa[7],  "*        *");
+    strcpy(mapa[8],  "*        *");
+    strcpy(mapa[9],  "**********");
+    jogadorX = 1;
+    jogadorY = 1;
+    chaveColetada = portaAberta = 0;
 }
 
 void carregarMapaFase2() {
-    char temp[ALTURA][LARGURA + 1] = {
+    limparMapa();
+    char* temp[20] = {
         "********************",
-        "*               D*",
-        "* *************** *",
-        "* *             * *",
-        "* *  #########     *",
-        "* *  #           * *",
-        "* *  #   @   #   * *",
-        "* *  #       #   * *",
-        "* *  #########   * *",
-        "* *              * *",
-        "* *              * *",
-        "* *              * *",
-        "* **************** *",
+        "*@       *        D",
+        "* *****  *  ****** *",
+        "* *   *     *    * *",
+        "* * # *  *  * #  * *",
+        "* *****  *  ****** *",
+        "*     *     *   *  *",
+        "****** ****** * *  *",
+        "*O    *      * *   *",
+        "* *** ******** *****",
+        "*                * *",
+        "* *** ***  ***   * *",
+        "* *   * *  * *   * *",
+        "* * # * *##* * # * *",
+        "* *** ***  *** *** *",
         "*                  *",
-        "*   ************   *",
-        "*        O     *   *",
-        "*              *   *",
-        "*   ************   *",
+        "*    *   X   *      *",
+        "* ***  *****  ***  **",
         "*                  *",
         "********************"
     };
-    int i;
-    for (i = 0; i < ALTURA; i++) {
-        strcpy(mapa[i], temp[i]);
-    }
-    jogadorX = 2;
+    for (i = 0; i < 20; i++) strcpy(mapa[i], temp[i]);
+    jogadorX = 1;
     jogadorY = 1;
-    monstroX = 6;
-    monstroY = 10;
+    monstroX = 10;
+    monstroY = 16;
+    mapa[monstroY][monstroX] = MONSTRO1;
+    chaveColetada = portaAberta = 0;
+}
+
+void carregarMapaFase3() {
+    int y;
+    char temp[40][41] = {
+        "****************************************",
+        "*         @                            *",
+        "* ************************************ *",
+        "* *                                  * *",
+        "* *  #########          X           * *",
+        "* *  #                          >   * *",
+        "* *  #   >   #   O                D * *",
+        "* *  #       #                   *** *",
+        "* *  #########                      * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* ************************************ *",
+        "*                                      *",
+        "*   ************                       *",
+        "*              *                       *",
+        "*              *                       *",
+        "*   ************                       *",
+        "*                                      *",
+        "*                                      *",
+        "* ************************************ *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* *                                  * *",
+        "* ************************************ *",
+        "*                                      *",
+        "*   ************                       *",
+        "*              *                       *",
+        "*              *                       *",
+        "*   ************                       *",
+        "*                                      *",
+        "*                                      *",
+        "****************************************"
+    };
+
+    for (y = 0; y < 40; y++) {
+        strcpy(mapa[y], temp[y]);
+    }
+
+    jogadorX = 9;
+    jogadorY = 1;
+    monstroX = 26;
+    monstroY = 4;
     mapa[monstroY][monstroX] = MONSTRO1;
     chaveColetada = 0;
     portaAberta = 0;
-    reinicios = 0;
 }
 
+
 void moverMonstro() {
-    int dir = rand() % 4;
     int dx[4] = {0, -1, 0, 1};
     int dy[4] = {-1, 0, 1, 0};
+    int dir = rand() % 4;
 
     int novoX = monstroX + dx[dir];
     int novoY = monstroY + dy[dir];
@@ -144,27 +199,44 @@ void moverMonstro() {
     if (novoX >= 0 && novoX < LARGURA && novoY >= 0 && novoY < ALTURA &&
         (mapa[novoY][novoX] == VAZIO || (novoX == jogadorX && novoY == jogadorY))) {
         mapa[monstroY][monstroX] = VAZIO;
-        monstroX = novoX;
-        monstroY = novoY;
+        monstroX = novoX; monstroY = novoY;
         mapa[monstroY][monstroX] = MONSTRO1;
+    }
+}
+
+void moverMonstro2() {
+    int dx = 0, dy = 0;
+
+    if (monstro2X < jogadorX) dx = 1;
+    else if (monstro2X > jogadorX) dx = -1;
+
+    if (monstro2Y < jogadorY) dy = 1;
+    else if (monstro2Y > jogadorY) dy = -1;
+
+    int novoX = monstro2X + dx;
+    int novoY = monstro2Y + dy;
+
+    // Só move se não for parede
+    if (novoX >= 0 && novoX < LARGURA && novoY >= 0 && novoY < ALTURA &&
+        mapa[novoY][novoX] != PAREDE && mapa[novoY][novoX] != MONSTRO1) {
+        mapa[monstro2Y][monstro2X] = VAZIO;
+        monstro2X = novoX;
+        monstro2Y = novoY;
+        mapa[monstro2Y][monstro2X] = 'V';
     }
 }
 
 void desenharMapa() {
     limparTela();
-    int i, j;
     printf("Reinicios: %d\n", reinicios);
     for (i = 0; i < ALTURA; i++) {
         for (j = 0; j < LARGURA; j++) {
-            if (i == jogadorY && j == jogadorX)
-                printf("%c", JOGADOR);
-            else
-                printf("%c", mapa[i][j]);
+            if (i == jogadorY && j == jogadorX) printf("%c", JOGADOR);
+            else printf("%c", mapa[i][j]);
         }
         printf("\n");
     }
-    printf("\n[WASD] mover | [I] interagir\n");
-    printf("Chave: %s\n", chaveColetada ? "SIM" : "NAO");
+    printf("\n[WASD] mover | [I] interagir\nChave: %s\n", chaveColetada ? "SIM" : "NAO");
 }
 
 void exibirTelaDerrota() {
@@ -175,16 +247,19 @@ void exibirTelaDerrota() {
     printf("Numero maximo de reinicios atingido.\n");
     printf("Pressione qualquer tecla para voltar ao menu...\n");
     _getch();
-
-    // Resetar variáveis para o novo jogo
     reinicios = 0;
-    jogadorX = 1;
-    jogadorY = 1;
-    chaveColetada = 0;
-    portaAberta = 0;
 }
 
-void interagir(int fase) {
+void exibirTelaVitoria() {
+    limparTela();
+    printf("====================\n");
+    printf("   VOCE VENCEU!!!   \n");
+    printf("====================\n");
+    printf("Parabens por completar todas as fases!\n");
+    _getch();
+}
+
+int interagir(int fase) {
     char obj = mapa[jogadorY][jogadorX];
     if (obj == CHAVE) {
         chaveColetada = 1;
@@ -203,19 +278,15 @@ void interagir(int fase) {
         }
     } else if (obj == BOTAO) {
         printf("Voce pressionou o botao...\nBOOM!\n");
-        reinicios++;
         _getch();
-    	if (reinicios >= 3) {
-    		exibirTelaDerrota();
-    		return;
-		}
-		
-		carregarMapaFase2();
-		
+        reinicios++;
+        if (reinicios >= 3) {
+            exibirTelaDerrota();
+            return -1;
+        }
+        carregarMapaFase2();
     } else if (obj == NPC && fase == 0) {
-        printf("NPC: Bem-vindo a vila. Use WASD para se mover.\n");
-        printf("Pegue a chave (@) e va ate a porta (D).\n");
-        printf("Ela e a entrada da masmorra.\n");
+        printf("NPC: Bem-vindo a vila. Use WASD para se mover.\nPegue a chave (@) e va ate a porta (D).\nEla e a entrada da masmorra.\n");
         _getch();
     }
 }
@@ -235,7 +306,7 @@ void moverJogador(char tecla) {
     }
 }
 
-void jogarFase(int fase) {
+int jogarFase(int fase) {
     if (fase == 0) carregarMapaVila();
     else if (fase == 1) carregarMapaFase1();
     else if (fase == 2) carregarMapaFase2();
@@ -244,23 +315,23 @@ void jogarFase(int fase) {
         desenharMapa();
         char tecla = _getch();
         if (tecla == 'i') {
-            interagir(fase);
+            if (interagir(fase) == -1) return -1;
         } else {
             moverJogador(tecla);
             if (fase == 2) moverMonstro();
-            if ((mapa[jogadorY][jogadorX] == ESPINHO) || (jogadorX == monstroX && jogadorY == monstroY)) {
+            if (mapa[jogadorY][jogadorX] == ESPINHO || (jogadorX == monstroX && jogadorY == monstroY)) {
                 reinicios++;
                 if (reinicios >= 3) {
-   					exibirTelaDerrota();
-    				return;
-				} else {
-                    printf("Voce tocou em um perigo! Reiniciando fase...\n");
-                    _getch();
-                    carregarMapaFase2();
+                    exibirTelaDerrota();
+                    return -1;
                 }
+                printf("Voce tocou em um perigo! Reiniciando fase...\n");
+                _getch();
+                carregarMapaFase2();
             }
         }
     }
+
     limparTela();
     printf("Parabens! Voce terminou a Fase %d!\n", fase);
     _getch();
@@ -270,11 +341,7 @@ void jogarFase(int fase) {
 
 void creditos() {
     limparTela();
-    printf("=== CREDITOS ===\n");
-    printf("Desenvolvido por: Seu Nome Aqui\n");
-    printf("Baseado em Gousmas War e Cobra na Caixa\n");
-    printf("================\n");
-    printf("Pressione qualquer tecla para voltar...\n");
+    printf("=== CREDITOS ===\nDesenvolvido por: Seu Nome Aqui\nBaseado em Gousmas War e Cobra na Caixa\n================\nPressione qualquer tecla para voltar...\n");
     _getch();
 }
 
@@ -289,11 +356,7 @@ int menu() {
     int opcao;
     do {
         limparTela();
-        printf("=== THE GAME 2 ===\n");
-        printf("1. Jogar\n");
-        printf("2. Creditos\n");
-        printf("3. Sair\n");
-        printf("Escolha: ");
+        printf("=== THE GAME 2 ===\n1. Jogar\n2. Creditos\n3. Sair\nEscolha: ");
         scanf("%d", &opcao);
         while (getchar() != '\n');
     } while (opcao < 1 || opcao > 3);
@@ -305,7 +368,10 @@ int main() {
     exibirTitulo();
     while (1) {
         int escolha = menu();
-        if (escolha == 1) jogarFase(0);
+        if (escolha == 1) {
+            int r = jogarFase(0);
+            if (r == -1) continue;
+        }
         else if (escolha == 2) creditos();
         else sairJogo();
     }
