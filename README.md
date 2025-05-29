@@ -1,42 +1,76 @@
-# *The Game 2*
+# The-Game-2-Dungeon-Crawler-
+O projeto envolve o desenvolvimento de um jogo em C. O objetivo do jogo é desafiar o jogador a passar de três fases, onde cada uma delas terá seu próprio mapa.
 
-***História***
+Bem-vindo(a) ao mundo de The Game 2 — uma jornada misteriosa entre monstros e memórias esquecidas. Este é um jogo de aventura textual em linguagem C, criado como projeto para a disciplina de Algoritmos e Codificação de Sistemas
 
-Em um mundo distante, o equilíbrio emocional da humanidade estava guardado por uma entidade adormecida chamada “Cobra na Caixa”, aprisionada sob as Montanhas do Silêncio. Após gerações em paz, sentimentos esquecidos como inveja, tristeza e raiva começaram a transbordar. Foi assim que surgiram as Gousmas — criaturas viscosas formadas pelas emoções corrompidas dos humanos.
+Em um mundo antigo e silencioso, um(a) viajante desperta na vila abandonada de Kalla. Tudo parece quieto demais, exceto pelas vozes que sussurram entre as ruínas. Só há uma forma de entender o que aconteceu: descer até as profundezas das masmorras esquecidas e encarar os monstros que guardam segredos de um passado destruído.
 
-Você é Arnar, um jovem do vilarejo de Hvitárvatn. Ao ouvir os sussurros vindos das florestas sombrias e dos antigos cantos da vila, você descobre que pertence à linhagem dos Guardiões da Canção, seres capazes de transformar emoções em energia viva. Agora, com o selo da “Cobra na Caixa” enfraquecendo, você deve impedir que as Gousmas libertem a entidade e tragam o caos ao mundo.
+Será você capaz de atravessar as três fases e encontrar a verdade por trás do portão final?
 
-“And we’ll build our empire from the ashes of hope…” – Of Monsters and Men
 
-***Como Jogar***
+--------------------------------------------------------------------------------------------
+Controles:
+--------------------------------------------------------------------------------------------
 
-Compile o jogo com um compilador C compatível com sua plataforma.
-Execute o jogo no terminal.
-Use as teclas W, A, S, D para movimentar o personagem.
-Enfrente Gousmas, evite armadilhas, ative mecanismos e colete cristais.
-Interaja com NPCs na vila (tela de tutorial) para aprender os controles.
-A jornada se passa por 3 fases, até o confronto final.
+W → mover para cima
 
-***Inimigos***
+A → mover para a esquerda
 
-Gousma Nível 1: Se move aleatoriamente. Um erro pode ser fatal.
-Gousma Nível 2: Segue o jogador com rastreio de movimento e visão.
-Armadilhas de espinhos: causam morte instantânea.
-Portais mágicos: permitem acesso entre zonas protegidas.
+S → mover para baixo
 
-***Estrutura do Projeto***
+D → mover para a direita
 
-main.c: Arquivo principal com o menu e loop do jogo.
-mapa.c: Renderização dos mapas, movimentação e colisão.
-fase1.c, fase2.c, fase3.c: Cada fase com inimigos, desafios e objetivos.
-monstros.c: Lógica de IA das Gousmas.
-telas.c: Telas de menu, vitória e derrota.
+I → interagir (com NPCs, chaves, portas etc.)
+
+--------------------------------------------------------------------------------------------
+Objetivo:
+--------------------------------------------------------------------------------------------
+
+Coletar a chave (@)
+
+Abrir a porta (D)
+
+Evitar monstros e armadilhas
+
+Avançar para a próxima fase através da porta aberta (=)
+
+--------------------------------------------------------------------------------------------
+
+Fases
+--------------------------------------------------------------------------------------------
+1. Vila (Tutorial)
+
+Apresenta o personagem e os comandos
+
+Possui um NPC (P) que dá instruções
+
+É preciso pegar a chave e abrir a porta para acessar a Fase 1
+
+2. Fase 1
+
+Mapa com paredes, chave, porta e um monstro de nível 1 (X)
+
+O monstro se move aleatoriamente
+
+Se você for tocado por ele, perde uma tentativa
+
+3. (próximas fases em expansão)
+
+O jogo pode ser expandido com novos elementos como espinhos, botões, teletransporte e monstros inteligentes (V)
+
+--------------------------------------------------------------------------------------------
+
+Dicas
+--------------------------------------------------------------------------------------------
+Fique atento ao número de tentativas. Se perder 3 vezes, você volta ao menu.
+
+--------------------------------------------------------------------------------------------
 
 
 Desenvolvedores
 --------------------------------------------------------------------------------------------
 
-Nome: [Igor Cecim Vilhena, Herbert Aciolly Leão de Jesus, ]
+Nome: [Igor Cecim Vilhena, Herbert Aciolly Leão de Jesus, Lucas Augusto Teixeira Silva Rodrigues]
 
 Curso: [Ciência da Computação]
 
