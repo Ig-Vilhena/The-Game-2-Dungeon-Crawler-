@@ -19,6 +19,7 @@
 #define BOTAO 'O'
 #define ESPINHO '#'
 #define MONSTRO1 'X'
+#define MONSTRO2 'V'
 
 // Variaveis globais
 char mapa[ALTURA][LARGURA + 1];
@@ -28,7 +29,7 @@ int monstroX = 6, monstroY = 10;
 int monstro2X = 1, monstro2Y = 1;
 int tele1X = 22, tele1Y = 36;
 int tele2X = 5, tele2Y = 1;
-int i, j;
+int i, j, y, x;
 
 void limparTela() {
     system("cls");
@@ -64,14 +65,14 @@ void carregarMapaVila() {
     limparMapa();
 	char temp[10][11] = {
         "**********",
+        "* @      *",
         "*        *",
-        "* P      *",
-        "*    @   *",
-        "*        *",
-        "*        *",
-        "*     D  *",
+        "*  P     *",
         "*        *",
         "*        *",
+        "*        *",
+        "*        *",
+        "*      D *",
         "**********"
     };
     for (i = 0; i < 10; i++) strcpy(mapa[i], temp[i]);
@@ -81,110 +82,125 @@ void carregarMapaVila() {
 
 void carregarMapaFase1() {
     limparMapa();
-    strcpy(mapa[0],  "**********");
-    strcpy(mapa[1],  "*@     * D");
-    strcpy(mapa[2],  "* **** * *");
-    strcpy(mapa[3],  "* *      *");
-    strcpy(mapa[4],  "* * **** *");
-    strcpy(mapa[5],  "*   *    *");
-    strcpy(mapa[6],  "***** ****");
-    strcpy(mapa[7],  "*        *");
-    strcpy(mapa[8],  "*        *");
-    strcpy(mapa[9],  "**********");
+    char* temp[10] = {
+        "**********",
+        "*     * D*",
+        "* **** * *",
+        "* *      *",
+        "* * **** *",
+        "*   *    *",
+        "***** ****",
+        "*        *",
+        "* @      *",
+        "**********"
+    };
+    for (i = 0; i < 10; i++) strcpy(mapa[i], temp[i]);
+
     jogadorX = 1;
     jogadorY = 1;
-    chaveColetada = portaAberta = 0;
+    chaveColetada = 0;
+    portaAberta = 0;
 }
+
 
 void carregarMapaFase2() {
     limparMapa();
     char* temp[20] = {
         "********************",
-        "*@       *        D",
-        "* *****  *  ****** *",
+        "*        *        D*",
+        "* ** **  *  ** *** *",
         "* *   *     *    * *",
         "* * # *  *  * #  * *",
         "* *****  *  ****** *",
-        "*     *     *   *  *",
-        "****** ****** * *  *",
-        "*O    *      * *   *",
+        "*           *    O *",
+        "****** *******     *",
+        "*            *     *",
         "* *** ******** *****",
         "*                * *",
         "* *** ***  ***   * *",
         "* *   * *  * *   * *",
-        "* * # * *##* * # * *",
+        "* *   * *##* *   * *",
         "* *** ***  *** *** *",
         "*                  *",
-        "*    *   X   *      *",
+        "*    *       *      *",  // Linha corrigida: removido o 'X'
         "* ***  *****  ***  **",
-        "*                  *",
+        "*  @                *",
         "********************"
     };
+
     for (i = 0; i < 20; i++) strcpy(mapa[i], temp[i]);
+
     jogadorX = 1;
     jogadorY = 1;
     monstroX = 10;
     monstroY = 16;
-    mapa[monstroY][monstroX] = MONSTRO1;
-    chaveColetada = portaAberta = 0;
+    chaveColetada = 0;
+    portaAberta = 0;
 }
 
+
 void carregarMapaFase3() {
-    int y;
     char temp[40][41] = {
         "****************************************",
-        "*         @                            *",
+        "*                                  @   *",
+        "*  *  *  *  *     *  *  *  *  *  *  *  *",
+        "*                                  >   *",
+        "*     *     *     *     *  *  *     *  *",
+        "*   *   *   *   *           *      *   *",
+        "*   *  *  *  * *  *  *  *  * *  *  *   *",
+        "*   *     *   * *     *     *    *   * *",
+        "*   *  *  *  *  *  *  * *** *  *  *   **",
+        "*     *     *     * * * * *    *   * * *",
+        "*  *  * *** *** * * * *  *  *  * * * * *",
+        "*     *   *     * * * *     *   * * * *",
+        "*  ** * *** ******* * ***** *** * * * *",
+        "*     *     *     * *     *     * * * *",
+        "*   ********* *** *************** * * *",
+        "*             *        >       O  * * *",
+        "*  *  *  *  *  *  *  *  *  *  *  *  * *",
+        "*                                     *",
+        "* * * * * * * * *******************   *",
+        "*     * *   * *                   *   *",
+        "* * * * * * *                   * *   *",
+        "*     * *   *               *   *     *",
+        "*     * *** * ************* * *****   *",
+        "*     *   * * *           * *     *   *",
+        "*   ******* * * ********* * ***** *   *",
+        "*           * *       *   *     * *   *",
+        "*               ***** *****       *   *",
+        "*                         *     * *   *",
+        "* *****************                   *",
+        "* *               *                   *",
+        "* * ************* *****               *",
+        "* *                                   *",
+        "* ******************************* *   *",
+        "* D                                   *",
         "* ************************************ *",
-        "* *                                  * *",
-        "* *  #########          X           * *",
-        "* *  #                          >   * *",
-        "* *  #   >   #   O                D * *",
-        "* *  #       #                   *** *",
-        "* *  #########                      * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* ************************************ *",
-        "*                                      *",
-        "*   ************                       *",
-        "*              *                       *",
-        "*              *                       *",
-        "*   ************                       *",
         "*                                      *",
         "*                                      *",
         "* ************************************ *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* *                                  * *",
-        "* ************************************ *",
-        "*                                      *",
-        "*   ************                       *",
-        "*              *                       *",
-        "*              *                       *",
-        "*   ************                       *",
-        "*                                      *",
         "*                                      *",
         "****************************************"
     };
 
+    int y;
     for (y = 0; y < 40; y++) {
         strcpy(mapa[y], temp[y]);
     }
 
-    jogadorX = 9;
+    jogadorX = 4;
     jogadorY = 1;
-    monstroX = 26;
-    monstroY = 4;
-    mapa[monstroY][monstroX] = MONSTRO1;
+    monstro2X = 38;
+    monstro2Y = 32;
+
     chaveColetada = 0;
     portaAberta = 0;
+
+    // Definindo as posições corretas dos teleportes
+    tele1X = 34;
+    tele1Y = 3;
+    tele2X = 26;
+    tele2Y = 15;
 }
 
 
@@ -198,9 +214,13 @@ void moverMonstro() {
 
     if (novoX >= 0 && novoX < LARGURA && novoY >= 0 && novoY < ALTURA &&
         (mapa[novoY][novoX] == VAZIO || (novoX == jogadorX && novoY == jogadorY))) {
-        mapa[monstroY][monstroX] = VAZIO;
-        monstroX = novoX; monstroY = novoY;
-        mapa[monstroY][monstroX] = MONSTRO1;
+
+        // Limpa o local antigo se o monstro estiver visível no mapa
+        if (mapa[monstroY][monstroX] == MONSTRO1)
+            mapa[monstroY][monstroX] = VAZIO;
+
+        monstroX = novoX;
+        monstroY = novoY;
     }
 }
 
@@ -216,28 +236,40 @@ void moverMonstro2() {
     int novoX = monstro2X + dx;
     int novoY = monstro2Y + dy;
 
-    // Só move se não for parede
     if (novoX >= 0 && novoX < LARGURA && novoY >= 0 && novoY < ALTURA &&
-        mapa[novoY][novoX] != PAREDE && mapa[novoY][novoX] != MONSTRO1) {
-        mapa[monstro2Y][monstro2X] = VAZIO;
+        mapa[novoY][novoX] != PAREDE) {
         monstro2X = novoX;
         monstro2Y = novoY;
-        mapa[monstro2Y][monstro2X] = 'V';
     }
 }
 
-void desenharMapa() {
+
+void desenharMapa(int fase) {
     limparTela();
-    printf("Reinicios: %d\n", reinicios);
-    for (i = 0; i < ALTURA; i++) {
+
+    int alturaMapa = ALTURA;
+    if (fase == 0 || fase == 1) alturaMapa = 10;
+    else if (fase == 2) alturaMapa = 20;
+    else if (fase == 3) alturaMapa = 40;
+
+    printf("Reinicios: %d | Chave: %s\n", reinicios, chaveColetada ? "SIM" : "NAO");
+    printf("[WASD] mover | [I] interagir\n\n");
+
+    for (i = 0; i < alturaMapa; i++) {
         for (j = 0; j < LARGURA; j++) {
-            if (i == jogadorY && j == jogadorX) printf("%c", JOGADOR);
-            else printf("%c", mapa[i][j]);
+            if (i == jogadorY && j == jogadorX)
+                printf("%c", JOGADOR);
+            else if (i == monstroY && j == monstroX)
+                printf("%c", MONSTRO1);
+            else if (fase == 3 && i == monstro2Y && j == monstro2X)
+                printf("V");
+            else
+                printf("%c", mapa[i][j]);
         }
         printf("\n");
     }
-    printf("\n[WASD] mover | [I] interagir\nChave: %s\n", chaveColetada ? "SIM" : "NAO");
 }
+
 
 void exibirTelaDerrota() {
     limparTela();
@@ -260,38 +292,46 @@ void exibirTelaVitoria() {
 }
 
 int interagir(int fase) {
-    char obj = mapa[jogadorY][jogadorX];
-    if (obj == CHAVE) {
-        chaveColetada = 1;
-        mapa[jogadorY][jogadorX] = VAZIO;
-        printf("Voce pegou a chave!\n");
-        _getch();
-    } else if (obj == PORTA) {
-        if (chaveColetada) {
-            mapa[jogadorY][jogadorX] = PORTA_ABERTA;
-            portaAberta = 1;
-            printf("Voce abriu a porta!\n");
-            _getch();
-        } else {
-            printf("Voce precisa da chave.\n");
-            _getch();
+    if (mapa[jogadorY][jogadorX] == NPC) {
+        if (fase == 0) {
+            printf("NPC: Bem-vindo à vila. Use WASD para se mover.\nPegue a chave (@) e vá até a porta (D).\nEla é a entrada da masmorra.\n");
         }
-    } else if (obj == BOTAO) {
-        printf("Voce pressionou o botao...\nBOOM!\n");
+        _getch();
+    }
+    else if (mapa[jogadorY][jogadorX] == CHAVE) {
+        chaveColetada = 1;
+        portaAberta = 1;
+        mapa[jogadorY][jogadorX] = VAZIO;
+        printf("Você pegou a chave! A porta agora está aberta.\n");
+        _getch();
+
+        // Abre todas as portas
+        for (y = 0; y < ALTURA; y++) {
+            for (x = 0; x < LARGURA; x++) {
+                if (mapa[y][x] == PORTA) {
+                    mapa[y][x] = PORTA_ABERTA;
+                }
+            }
+        }
+    }
+    else if (mapa[jogadorY][jogadorX] == BOTAO) {
+        printf("Você apertou o botão... Era uma armadilha!\n");
         _getch();
         reinicios++;
         if (reinicios >= 3) {
             exibirTelaDerrota();
             return -1;
         }
-        carregarMapaFase2();
-    } else if (obj == NPC && fase == 0) {
-        printf("NPC: Bem-vindo a vila. Use WASD para se mover.\nPegue a chave (@) e va ate a porta (D).\nEla e a entrada da masmorra.\n");
-        _getch();
+        if (fase == 0) carregarMapaVila();
+        else if (fase == 1) carregarMapaFase1();
+        else if (fase == 2) carregarMapaFase2();
+        else if (fase == 3) carregarMapaFase3();
     }
+
+    return 0;
 }
 
-void moverJogador(char tecla) {
+void moverJogador(char tecla, int fase) {
     int novoX = jogadorX;
     int novoY = jogadorY;
 
@@ -303,6 +343,19 @@ void moverJogador(char tecla) {
     if (novoX >= 0 && novoX < LARGURA && novoY >= 0 && novoY < ALTURA && mapa[novoY][novoX] != PAREDE) {
         jogadorX = novoX;
         jogadorY = novoY;
+
+        // Teletransporte automático
+        if (mapa[jogadorY][jogadorX] == '>') {
+            if (jogadorX == tele1X && jogadorY == tele1Y) {
+                jogadorX = tele2X;
+                jogadorY = tele2Y;
+            } else if (jogadorX == tele2X && jogadorY == tele2Y) {
+                jogadorX = tele1X;
+                jogadorY = tele1Y;
+            }
+            printf("Voce foi teleportado!\n");
+            _getch();
+        }
     }
 }
 
@@ -310,16 +363,39 @@ int jogarFase(int fase) {
     if (fase == 0) carregarMapaVila();
     else if (fase == 1) carregarMapaFase1();
     else if (fase == 2) carregarMapaFase2();
+    else if (fase == 3) carregarMapaFase3();
 
-    while (!portaAberta) {
-        desenharMapa();
+    while (1) {
+        desenharMapa(fase);
         char tecla = _getch();
+
         if (tecla == 'i') {
-            if (interagir(fase) == -1) return -1;
-        } else {
-            moverJogador(tecla);
+            if (mapa[jogadorY][jogadorX] == PORTA_ABERTA && portaAberta) {
+                printf("Voce passou para a proxima fase!\n");
+                _getch();
+                if (fase == 0) return jogarFase(1);
+                else if (fase == 1) return jogarFase(2);
+                else if (fase == 2) return jogarFase(3);
+                else if (fase == 3) {
+                    exibirTelaVitoria();
+                    return 0;
+                }
+            } else {
+                if (interagir(fase) == -1) return -1;
+            }
+        } else if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
+            moverJogador(tecla, fase);
+
             if (fase == 2) moverMonstro();
-            if (mapa[jogadorY][jogadorX] == ESPINHO || (jogadorX == monstroX && jogadorY == monstroY)) {
+            if (fase == 3) moverMonstro2();
+            else {
+                monstro2X = -1;
+                monstro2Y = -1;
+            }
+
+            if (mapa[jogadorY][jogadorX] == ESPINHO ||
+                (jogadorX == monstroX && jogadorY == monstroY) ||
+                (jogadorX == monstro2X && jogadorY == monstro2Y)) {
                 reinicios++;
                 if (reinicios >= 3) {
                     exibirTelaDerrota();
@@ -327,21 +403,21 @@ int jogarFase(int fase) {
                 }
                 printf("Voce tocou em um perigo! Reiniciando fase...\n");
                 _getch();
-                carregarMapaFase2();
+
+                if (fase == 0) carregarMapaVila();
+                else if (fase == 1) carregarMapaFase1();
+                else if (fase == 2) carregarMapaFase2();
+                else if (fase == 3) carregarMapaFase3();
             }
         }
     }
-
-    limparTela();
-    printf("Parabens! Voce terminou a Fase %d!\n", fase);
-    _getch();
-    if (fase == 0) jogarFase(1);
-    else if (fase == 1) jogarFase(2);
 }
+
+
 
 void creditos() {
     limparTela();
-    printf("=== CREDITOS ===\nDesenvolvido por: Seu Nome Aqui\nBaseado em Gousmas War e Cobra na Caixa\n================\nPressione qualquer tecla para voltar...\n");
+    printf("=== CREDITOS ===\nDesenvolvido por: \nIgor Cecim Vilhena\n Lucas Augusto Teixeira Silva Rodrigues\n Herbert Aciolly Leao de Jesus\n================\nPressione qualquer tecla para voltar...\n");
     _getch();
 }
 
@@ -371,8 +447,7 @@ int main() {
         if (escolha == 1) {
             int r = jogarFase(0);
             if (r == -1) continue;
-        }
-        else if (escolha == 2) creditos();
+        } else if (escolha == 2) creditos();
         else sairJogo();
     }
     return 0;
