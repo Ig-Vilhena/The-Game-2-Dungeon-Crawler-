@@ -115,14 +115,14 @@ void carregarMapaFase2() {
         "*           *    O  *",
         "****** *******      *",
         "*            *      *",
-        "* *** ******** *****",
+        "* *** ******** **** *",
         "*                *  *",
         "* *** ***  ***   *  *",
         "* *   * *  * *   *  *",
         "* *   * *##* *   *  *",
         "* *** ***  *** ***  *",
         "*                   *",
-        "*    *       *      *",
+        "*    *       *      *",  
         "* ***  *****  ***  **",
         "*  @                *",
         "********************"
@@ -192,8 +192,6 @@ void carregarMapaFase3() {
     jogadorY = 1;
     monstro2X = 38;
     monstro2Y = 32;
-    monstroX = 10;
-    monstroY = 16;
 
     chaveColetada = 0;
     portaAberta = 0;
@@ -296,7 +294,7 @@ void exibirTelaVitoria() {
 int interagir(int fase) {
     if (mapa[jogadorY][jogadorX] == NPC) {
         if (fase == 0) {
-            printf("NPC: Bem-vindo a vila. Use WASD para se mover.\nPegue a chave (@) e va ate a porta (D).\nEla e a entrada da masmorra.\n");
+            printf("NPC: Bem-vindo à vila. Use WASD para se mover.\nPegue a chave (@) e vá até a porta (D).\nEla é a entrada da masmorra.\n");
         }
         _getch();
     }
@@ -304,7 +302,7 @@ int interagir(int fase) {
         chaveColetada = 1;
         portaAberta = 1;
         mapa[jogadorY][jogadorX] = VAZIO;
-        printf("Voce pegou a chave! A porta agora esta aberta.\n");
+        printf("Você pegou a chave! A porta agora está aberta.\n");
         _getch();
 
         // Abre todas as portas
@@ -317,7 +315,7 @@ int interagir(int fase) {
         }
     }
     else if (mapa[jogadorY][jogadorX] == BOTAO) {
-        printf("Voce apertou o botao... Era uma armadilha!\n");
+        printf("Você apertou o botão... Era uma armadilha!\n");
         _getch();
         reinicios++;
         if (reinicios >= 3) {
