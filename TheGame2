@@ -387,11 +387,13 @@ int jogarFase(int fase) {
             moverJogador(tecla, fase);
 
             if (fase == 2) moverMonstro();
-            if (fase == 3) moverMonstro2();
-            else {
-                monstro2X = -1;
-                monstro2Y = -1;
-            }
+    	    if (fase == 3) {
+        	moverMonstro();
+        	moverMonstro2();
+    	     } else {
+        	monstro2X = -1;
+        	monstro2Y = -1;
+    	     }
 
             if (mapa[jogadorY][jogadorX] == ESPINHO ||
                 (jogadorX == monstroX && jogadorY == monstroY) ||
